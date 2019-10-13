@@ -14,8 +14,6 @@ phases:
     commands:
       - ./gradlew build
       - echo $ECR_REPOS
-      - echo $CODEBUILD_WEBHOOK_HEAD_REF
-      - echo $CODEBUILD_WEBHOOK_BASE_REF
       - BRANCH=${CODEBUILD_WEBHOOK_TRIGGER#branch/}
       - VERSION=${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - TAG_BRANCH=$ECR_REPOS:$BRANCH
