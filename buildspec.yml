@@ -1,0 +1,27 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_REGION: "ap-northeast-1"
+    ECR_REPOS: "ECR_REPOS"
+    
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region $AWS_REGION)
+  build:
+    commands:
+      - echo $ECR_REPOS
+      - BRANCH=$(git rev-parse --abbrev-ref HEAD)
+      - echo $BRANCH
+      - TAG=$ECR_REPOS:$BRANCH
+      - echo $TAG
+      - docker build . -t $TAG . 
+  post_build:
+    commands:
+      - docker push $TAG
+
+artifacts:
+  files:
+    - build/reports/**/*
+  discard-paths: no
