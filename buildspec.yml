@@ -14,7 +14,7 @@ phases:
     commands:
       - ./gradlew build
       - echo $ECR_REPOS
-      - BRANCH=`git rev-parse --abbrev-ref HEAD`
+      - BRANCH=`git branch --contains=HEAD`
       - echo $BRANCH
       - TAG=$ECR_REPOS:$BRANCH
       - echo $TAG
