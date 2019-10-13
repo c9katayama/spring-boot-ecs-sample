@@ -13,7 +13,7 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
   build:
     commands:
-      - ./gradrew build
+      - ./gradlew build
       - echo $ECR_REPOS
       - BRANCH=$(git symbolic-ref --short HEAD)
       - echo $BRANCH
