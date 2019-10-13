@@ -1,11 +1,13 @@
 version: 0.2
-
 env:
   variables:
     AWS_REGION: "ap-northeast-1"
     ECR_REPOS: "ECR_REPOS"
     
 phases:
+  install:
+    runtime-versions:
+      docker: 18
   pre_build:
     commands:
       - $(aws ecr get-login --region $AWS_REGION)
