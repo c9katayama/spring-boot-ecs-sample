@@ -15,17 +15,11 @@ phases:
       - ./gradlew build
       - echo $ECR_REPOS
       - BRANCH=${CODEBUILD_WEBHOOK_TRIGGER#branch/}
-      - echo $BRANCH
-      - VERSION=${CODEBUILD_SOURCE_VERSION}
-      - echo $VERSION
-      - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - VERSION=${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - TAG_BRANCH=$ECR_REPOS:$BRANCH
       - TAG_VERSION=$ECR_REPOS:$VERSION
-      - echo $TAG_BRANCH
-      - echo $TAG_VERSION
       - docker build -t $TAG_BRANCH .
       - docker tag $TAG_BRANCH $TAG_VERSION
-      - docker images
   post_build:
     commands:
       - docker push $TAG_BRANCH
