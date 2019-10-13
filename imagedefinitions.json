@@ -1,0 +1,6 @@
+[
+  {
+    "name": "spring-boot-ecs-sample-container",
+    "imageUri": "903921708000.dkr.ecr.ap-northeast-1.amazonaws.com/spring-boot-ecs-sample:branch1"
+  }
+]
