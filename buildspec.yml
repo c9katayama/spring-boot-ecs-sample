@@ -24,7 +24,7 @@ phases:
     commands:
       - docker push $TAG_BRANCH
       - docker push $TAG_VERSION
-		- printf '{"Version":"1.0","ImageURI":"%s"}' $TAG_BRANCH > imageDetail.json
+      - printf '{"Version":"1.0","ImageURI":"%s"}' $TAG_BRANCH > imageDetail.json
  
 artifacts:
   files:
