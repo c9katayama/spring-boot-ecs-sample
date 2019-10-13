@@ -18,7 +18,7 @@ phases:
       - echo $BRANCH
       - TAG=$ECR_REPOS:$BRANCH
       - echo $TAG
-      - docker build . -t $TAG . 
+      - docker build -t $TAG . 
   post_build:
     commands:
       - docker push $TAG
