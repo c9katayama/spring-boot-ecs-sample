@@ -11,4 +11,3 @@ eval `aws ecr get-login --region ap-northeast-1 --no-include-email`
 ```
 docker build .
 ```
-
