@@ -16,13 +16,20 @@ phases:
       - echo $ECR_REPOS
       - BRANCH=${CODEBUILD_WEBHOOK_TRIGGER#branch/}
       - echo $BRANCH
-      - TAG=$ECR_REPOS:$BRANCH
-      - echo $TAG
-      - docker build -t $TAG . 
+      - VERSION=${CODEBUILD_SOURCE_VERSION}
+      - echo $VERSION
+      - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - TAG_BRANCH=$ECR_REPOS:$BRANCH
+      - TAG_VERSION=$ECR_REPOS:$VERSION
+      - echo $TAG_BRANCH
+      - echo $TAG_VERSION
+      - docker build -t $TAG_BRANCH .
+      - docker tag $TAG_BRANCH $TAG_VERSION
       - docker images
   post_build:
     commands:
-      - docker push $TAG
+      - docker push $TAG_BRANCH
+      - docker push $TAG_VERSION
 
 artifacts:
   files:
