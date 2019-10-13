@@ -13,12 +13,14 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
   build:
     commands:
+      - ./gradrew build
       - echo $ECR_REPOS
-      - BRANCH=$(git rev-parse --abbrev-ref HEAD)
+      - BRANCH=$(git symbolic-ref --short HEAD)
       - echo $BRANCH
       - TAG=$ECR_REPOS:$BRANCH
       - echo $TAG
       - docker build -t $TAG . 
+      - docker tag $TAG $TAG
   post_build:
     commands:
       - docker push $TAG
