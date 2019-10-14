@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClient;
+import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagementClientBuilder;
 import com.amazonaws.services.simplesystemsmanagement.model.GetParametersByPathRequest;
 import com.amazonaws.services.simplesystemsmanagement.model.GetParametersByPathResult;
 
@@ -28,13 +29,13 @@ public class CommonConfig {
 	public DBConfig dbConfig() {
 		Map<String, String> paramMap = loadParamsFromSSM();
 		DBConfig config = new DBConfig();
-		config.dbUrl = paramMap.get("dbUrl");
-		config.dbPassword = paramMap.get("dbPassword");
+		config.dbUrl = paramMap.get("dburl");
+		config.dbPassword = paramMap.get("dbpassword");
 		return config;
 	}
 
 	private Map<String, String> loadParamsFromSSM() {
-		AWSSimpleSystemsManagement ssmClient = AWSSimpleSystemsManagementClient.builder()
+		AWSSimpleSystemsManagement ssmClient = AWSSimpleSystemsManagementClientBuilder.standard()
 				.withRegion(Regions.AP_NORTHEAST_1).build();
 		String ssmPathPrefix = "/spring-boot-ecs-sample/";
 		GetParametersByPathRequest reqeust = new GetParametersByPathRequest().withPath(ssmPathPrefix)
