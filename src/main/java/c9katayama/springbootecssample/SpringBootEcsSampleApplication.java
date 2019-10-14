@@ -16,12 +16,12 @@ public class SpringBootEcsSampleApplication {
 	public class IndexController {
 		@GetMapping
 		public String index() {
-			return "OK";
+			return "OK2";
 		}
 
 		@GetMapping(path = "/hello")
 		public String hello() {
-			return "hello";
+			return "hello2";
 		}
 	}
 }
