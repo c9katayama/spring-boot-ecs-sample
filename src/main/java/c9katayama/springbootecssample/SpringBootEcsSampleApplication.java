@@ -1,9 +1,9 @@
 package c9katayama.springbootecssample;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,7 +28,6 @@ public class SpringBootEcsSampleApplication {
 
 	@RestController
 	public class IndexController {
-
 		@Autowired
 		private DBConfig dbConfig;
 
@@ -45,10 +44,13 @@ public class SpringBootEcsSampleApplication {
 		@GetMapping(path = "/db")
 		public String db() {
 			try {
+				log.info("connect to " + dbConfig.dbUrl);
 				Connection connection = DriverManager.getConnection(dbConfig.dbUrl, "admin", dbConfig.dbPassword);
-				ResultSet executeQuery = connection.createStatement().executeQuery("SHOW DATABASES;");
-				if (executeQuery.next()) {
-					return executeQuery.getString(0);
+				DatabaseMetaData meta = connection.getMetaData();
+				ResultSet resultSet = meta.getCatalogs();
+				while (resultSet.next()) {
+					String db = resultSet.getString("TABLE_CAT");
+					return db;
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
