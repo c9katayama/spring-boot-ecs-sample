@@ -34,7 +34,7 @@ public class SpringBootEcsSampleApplication {
 
 		@GetMapping
 		public String index() {
-			return "OK7";
+			return "OK8";
 		}
 
 		@GetMapping(path = "/hello")
@@ -50,7 +50,7 @@ public class SpringBootEcsSampleApplication {
 				if (executeQuery.next()) {
 					return executeQuery.getString(0);
 				}
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return e.getMessage();
 			}
