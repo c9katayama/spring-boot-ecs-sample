@@ -31,9 +31,6 @@ artifacts:
   files:
     - build/reports/**/*
     - imageDetail.json
-    - appspec.yaml
-    - buildspec.yml
-    - taskdef.json
   discard-paths: no
  
 cache:
