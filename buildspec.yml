@@ -12,6 +12,7 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
+      - env
       - ./gradlew build
       - echo $ECR_REPOS
       - BRANCH=${CODEBUILD_WEBHOOK_TRIGGER#branch/}
