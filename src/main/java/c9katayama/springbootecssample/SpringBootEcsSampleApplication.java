@@ -16,7 +16,7 @@ public class SpringBootEcsSampleApplication {
 	public class IndexController {
 		@GetMapping
 		public String index() {
-			return "OK5";
+			return "OK6";
 		}
 
 		@GetMapping(path = "/hello")
